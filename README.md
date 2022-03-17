@@ -11,29 +11,62 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+
+dio网络库封装。
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+* download接口支持
+* upload接口支持
+* 请求数据缓存支持
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+打开`pubspec.yaml`文件，输入：`maby_dio: ^0.0.1`
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+### 普通使用
 
 ```dart
-const like = 'sample';
+HttpResponse res = await HttpRequest().get('/article/today');
+print(res.data?.responseData);
 ```
 
-## Additional information
+### 自定义TargetApi
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+```dart
+class CustomTargetApi extends TargetApi {
+  @override
+  String get baseUrl => 'your base url';
+}
+
+HttpResponse res = await HttpRequest(api: CustomTargetApi()).get('/article/today');
+print(res.data?.responseData);
+```
+
+### 响应数据自动解析为模型数据
+
+```dart
+class CustomModel extends Codable {
+  String? author;
+  String? title;
+
+  @override
+  fromJson(Map<String, dynamic> json) {
+    author = json['author'];
+    title = json['title'];
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    // TODO: implement toJson
+    throw UnimplementedError();
+  }
+}
+
+CustomModel model = CustomModel();
+HttpResponse res = await HttpRequest(api: CustomTargetApi()).get('/article/today', model: model);
+print(model.title);
+```
+

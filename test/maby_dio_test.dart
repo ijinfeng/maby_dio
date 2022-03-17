@@ -4,20 +4,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:maby_dio/maby_dio.dart';
 
 
-class Wenzhang extends Codable {
-  Map? date;
+class CustomModel extends Codable {
   String? author;
-
   String? title;
-
-  String? digest;
 
   @override
   fromJson(Map<String, dynamic> json) {
-    date = json['date'];
     author = json['author'];
     title = json['title'];
-    digest = json['digest'];
   }
 
   @override
@@ -25,12 +19,16 @@ class Wenzhang extends Codable {
     // TODO: implement toJson
     throw UnimplementedError();
   }
-
-
 }
 
+class CustomTargetApi extends TargetApi {
+  @override
+  String get baseUrl => 'your base url';
+}
+
+
 void main() {
-  test('dio test', () {
+  test('dio test', () async {
     //接口测试 https://github.com/shichunlei/-Api/blob/master/OneArticle.md
     
     // HttpDefaultConfig().initialize('https://interface.meiriyiwen.com');
@@ -43,6 +41,9 @@ void main() {
 //       print('完成');
 //     });
     
+CustomModel model = CustomModel();
+HttpResponse res = await HttpRequest(api: CustomTargetApi()).get('/article/today', model: model);
+print(model.title);
 
 
   Dio _dio = Dio();
