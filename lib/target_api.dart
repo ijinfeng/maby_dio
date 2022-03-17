@@ -18,3 +18,12 @@ abstract class TargetApi {
 
   Map<String, dynamic>? get headers => null;
 }
+
+class DefaultTargetApi extends TargetApi {
+  final String _baseUrl;
+
+  DefaultTargetApi(this._baseUrl);
+
+  @override
+  String get baseUrl => _baseUrl;  
+}

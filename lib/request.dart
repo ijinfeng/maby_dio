@@ -2,12 +2,10 @@ import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:maby_dio/default_config.dart';
-import 'package:maby_dio/default_target_api.dart';
 import 'package:maby_dio/response.dart';
 import 'package:maby_dio/response_serialize.dart';
 import 'package:maby_dio/target_api.dart';
 import 'package:maby_dio/codable.dart';
-
 
 class HttpRequest {
   final Dio _dio = Dio();
@@ -58,7 +56,8 @@ extension HTTP<T extends Codable> on HttpRequest {
     return _request(path,
         queryParamaters: queryParamaters,
         headers: headers,
-        serializer: serializer);
+        serializer: serializer,
+        model: model);
   }
 
   Future<HttpResponse> post(String path,
@@ -72,7 +71,8 @@ extension HTTP<T extends Codable> on HttpRequest {
         queryParamaters: queryParamaters,
         data: data,
         headers: headers,
-        serializer: serializer);
+        serializer: serializer,
+        model: model);
   }
 
   Future<HttpResponse> patch(String path,
@@ -86,7 +86,8 @@ extension HTTP<T extends Codable> on HttpRequest {
         queryParamaters: queryParamaters,
         data: data,
         headers: headers,
-        serializer: serializer);
+        serializer: serializer,
+        model: model);
   }
 
   Future<HttpResponse> delete(String path,
@@ -100,7 +101,8 @@ extension HTTP<T extends Codable> on HttpRequest {
         queryParamaters: queryParamaters,
         data: data,
         headers: headers,
-        serializer: serializer);
+        serializer: serializer,
+        model: model);
   }
 
   Future<HttpResponse> put(String path,
@@ -114,7 +116,8 @@ extension HTTP<T extends Codable> on HttpRequest {
         queryParamaters: queryParamaters,
         data: data,
         headers: headers,
-        serializer: serializer);
+        serializer: serializer,
+        model: model);
   }
 
   Future<HttpResponse> _request(String path,

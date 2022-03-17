@@ -10,9 +10,9 @@ class HttpDefaultConfig {
   HttpDefaultConfig get shared => _instance;
 
 /// 默认域名地址
-  late final String _defaultBaseUrl;
+  late String _defaultBaseUrl = '';
 
-  void invoke(String baseUrl) {
+  void initialize(String baseUrl) {
     _instance._defaultBaseUrl = baseUrl;
   }
 
