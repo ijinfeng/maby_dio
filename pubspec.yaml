@@ -1,5 +1,5 @@
 name: maby_dio
-description: A new Flutter package project.
+description: dio网络库封装
 version: 0.0.1
 homepage: 'https://github.com/ijinfeng/maby_dio'
 
